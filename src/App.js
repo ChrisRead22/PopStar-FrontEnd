@@ -6,9 +6,34 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Checkout from "./Checkout";
 import React, {useState,useEffect} from "react"
 import Login from "./Login";
+import NewItemForm from "./NewItemForm.jsx";
+import SellerContainer from "./SellerContainer";
+import PopContainer from "./PopContainer"
+import SignupForm from "./SignupForm";
 
 function App() {
   const [cart, setCart] = useState({})
+  const [items, setItems] = useState([])
+  //console.log(items)
+
+  useEffect(() => {
+    fetch("http://localhost:3000/items")
+      .then((r) => r.json())
+      .then((itemArray) => {
+        setItems(itemArray);
+      });
+  }, []);
+
+
+  function addItem(newItem) {
+    const updatedItemArray = [...items, newItem];
+    setItems(updatedItemArray);
+  }
+
+  function deleteItem(id) {
+    const updatedItemArray = items.filter((item) => item.id !== id);
+    setItems(updatedItemArray);
+  }
   
   return (
     <Router>
@@ -16,20 +41,25 @@ function App() {
       
         
         <Switch>
-        <Route path="/login">
+      <Route path="/login">
         <Login />
       </Route>
-          <Route path="/checkout">
+      <Route path="/checkout">
           <Header />
          <Checkout />
       </Route>
-          <Route path="/">
-          <Header />
+      <Route path="/">
+      <PopContainer items={items} deleteItem={deleteItem} addItem={addItem}/>
           <Home />
+          {/* <NewItemForm addItem={handleNewItem}/> */}
       </Route>
+      <SellerContainer />
+      <SignupForm />
+      {/* pass addItem in PopContainer */}
         </Switch>
       </div>
     </Router>
+      
   );
 }
 

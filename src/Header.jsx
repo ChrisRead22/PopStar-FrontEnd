@@ -3,7 +3,10 @@ import "./Header.scss";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
 import Cart from "./Cart";
+
 const Header = () => {
+  
+  
   return (
     <div className="header">
       <Link to="/">

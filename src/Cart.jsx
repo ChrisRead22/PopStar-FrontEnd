@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
 const Cart = () => {
+
+
+
+
+  
   return (
     <div className="cart">
       <Link to="/checkout">
