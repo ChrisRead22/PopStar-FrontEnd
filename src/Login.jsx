@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./Login.scss";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 
+const url = `http://localhost:3000/login`
 
-const Login = () => {
+const Login = ({setCurrentUser}) => {
+  const history = useHistory();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -15,7 +17,20 @@ const Login = () => {
   };
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log("click")
+      console.log("click")
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(formData),
+      })
+        .then(response => response.json())
+        .then(user =>
+          setCurrentUser(user)
+        )
+        history.push("/popContainer")
     }
   return (
     <div className="login">
@@ -30,10 +45,11 @@ const Login = () => {
         <h1>Sign-in</h1>
         <form onSubmit={handleSubmit}>
           <h5>E-mail</h5>
-          <input value={formData.email} onChange={handleChange} type="text" />
+          <input name ="email" value={formData.email} onChange={handleChange} type="text" />
           <h5>Password</h5>
           <input
-            value={formData.email}
+            name="password"
+            value={formData.password}
             onChange={handleChange}
             type="password"
           />

@@ -15,8 +15,9 @@ import SignupForm from "./SignupForm";
 function App() {
   const [cart, setCart] = useState({})
   const [items, setItems] = useState([])
+  const [currentUser, setCurrentUser] = useState(null)
   //console.log(items)
-
+console.log(currentUser)
   useEffect(() => {
     fetch("http://localhost:3000/items")
       .then(r => r.json())
@@ -38,14 +39,14 @@ function App() {
 
   function updateItem(updatedItem) {
     
-    const updatedItemArray = Items.map((item) => {
+    const updatedItemArray = items.map((item) => {
       if (item.id === updatedItem.id) {
       return updatedItem;
       } else {
       return item;
       }
       });
-      setItem(updatedItemArray);
+      setItems(updatedItemArray);
   }
   
   return (
@@ -54,16 +55,19 @@ function App() {
       
         
         <Switch>
+          <Route path="/popContainer">
+          <Header />
+            <PopContainer currentUser={currentUser} items={items} deleteItem={deleteItem} addItem={addItem} updateItem={updateItem}/>
+      </Route>
       <Route path="/login">
-        <Login />
+        <Login setCurrentUser={setCurrentUser} />
       </Route>
       <Route path="/checkout">
           <Header />
          <Checkout />
       </Route>
           <Route path="/">
-          <Header />
-            <PopContainer items={items} deleteItem={deleteItem} addItem={addItem} updateItem={updateItem}/>
+            <Home/>
           
           {/* <NewItemForm addItem={handleNewItem}/> */}
       </Route>

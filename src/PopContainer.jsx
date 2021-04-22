@@ -1,13 +1,16 @@
 import React from 'react';
+import EditPopCard from './EditPopCard';
 import NewItemForm from './NewItemForm';
 import PopCard from './PopCard';
 
 
-const PopContainer = ({items, deleteItem, addItem}) => {
+const PopContainer = ({items, deleteItem, addItem,currentUser,updateItem={updateItem}}) => {
     console.log(items)
 
 const allItems = items.map(item => {
   return <PopCard
+    updateItem={updateItem}
+    currentUser={currentUser}
     deleteItem={deleteItem}
     addItem={addItem}
       key={item.id}
@@ -22,8 +25,9 @@ const allItems = items.map(item => {
     
     <div className="home">
       <div className="home__container">
-        <NewItemForm addItem={addItem}/>
-        
+        {currentUser ?
+          <NewItemForm addItem={addItem} />
+          : ''}
         <img className="home__image" src="https://ar.al/2020/08/07/what-is-the-small-web/small-web-topology.jpg"></img>
         <div className="home__row">
          {allItems}

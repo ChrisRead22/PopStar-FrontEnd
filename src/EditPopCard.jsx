@@ -1,35 +1,41 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
-function NewItemForm({ addItem }) {
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
-  const [price, setPrice] = useState("");
+const EditPopCard = ({updateItem, id}) => {
+    const [name, setName] = useState("");
+    const [image, setImage] = useState("");
+    const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-
-
+  console.log(id)
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("http://localhost:3000/items", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        image: image,
-        price: price,
-        description: description,
-        user_id: 1
+    console.log("clicked")
+
+    fetch(`http://localhost:3000/items/${id}`, {
+         method: "PATCH",
+         headers: {
+          "Content-Type": "application/json",
+         },
+    body: JSON.stringify({
+      name: name,
+      image: image,
+      price: price,
+      description: description,
+      user_id: 1
       }),
-    })
-      .then((r) => r.json())
-      .then((newItem) => addItem(newItem));
+        })
+         .then((r) => r.json())
+         .then((updatedItem) => {
+        updateItem(updatedItem);
+         });
+
+
+
   }
+  
 
   return (
-    <div className="new-Item-form">
-      <h2>New Item</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="edit">
+      <form onSubmit={handleSubmit} className="editCard">
         <input
           type="text"
           name="name"
@@ -52,17 +58,17 @@ function NewItemForm({ addItem }) {
           value={price}
           onChange={(e) => setPrice(parseFloat(e.target.value))}
         />
-         <input
+        <input
           type="text"
           name="description"
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <button type="submit">Add Item</button>
+        <button type="submit" >Submit</button>
       </form>
     </div>
   );
-}
+};
 
-export default NewItemForm;
+export default EditPopCard;
