@@ -2,26 +2,35 @@ import { useState } from 'react'
 import React from 'react';
 import "./PopCard.scss"
 import PopCardDetails from './PopCardDetails'
+import CancelIcon from '@material-ui/icons/Cancel';
 
-function PopCard ({id, name, description, price, image, deleteItem, addItem}) {
+function PopCard ({id, name, description, price, image, deleteItem,updateItem}) {
     //const { id } = useParams();
 
 
     const [item, setItem] = useState({})
-    console.log(id)
+    const [updatedItem, setUpdatedItem] = useState(item);
 
-function handleClick () {
-    console.log("clicked")
-
+function handleUpdateClick () {
+    fetch(`http://localhost:3000/items/${id}`, {
+           method: "PATCH",
+           headers: {
+            "Content-Type": "application/json",
+           },
+           body: JSON.stringify({ item: updatedItem }),
+          })
+           .then((r) => r.json())
+           .then((updatedItem) => {
+        setUpdatedItem(updatedItem);
+           });
 }
-
- function handleClickOnImage () {
-    console.log("clicked")
-
-        fetch(`http://localhost:3000/items/${id}`)
-            .then(res => res.json())
-            .then(res => renderCardDetails(res))
-    }
+    const handleDeleteClick = () => {
+    
+        fetch(`http://localhost:3000/items/${id}`, {
+            method: "DELETE",
+        });
+        deleteItem(id);
+}
 
     return(
         
@@ -37,9 +46,15 @@ function handleClick () {
                 <p>*</p>
             </div>
         </div>
-        <img className="card__image" onClick={handleClickOnImage} src={image} alt={name} />
+        <img className="card__image"  src={image} alt={name} />
             
-            <button className="cart__button" onClick={handleClick}>Add To Cart </button>
+            <span>
+                <button className="cart__button" onClick={handleUpdateClick}> Update </button>
+                <button className="delete__button" onClick={handleDeleteClick}>Remove</button>
+            </span>
+
+            {/* <span><CancelIcon className="delete__button"/></span> */}
+            
             
     </div>
        

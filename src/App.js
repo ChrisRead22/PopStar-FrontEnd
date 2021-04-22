@@ -11,6 +11,7 @@ import SellerContainer from "./SellerContainer";
 import PopContainer from "./PopContainer"
 import SignupForm from "./SignupForm";
 
+
 function App() {
   const [cart, setCart] = useState({})
   const [items, setItems] = useState([])
@@ -18,7 +19,7 @@ function App() {
 
   useEffect(() => {
     fetch("http://localhost:3000/items")
-      .then((r) => r.json())
+      .then(r => r.json())
       .then((itemArray) => {
         setItems(itemArray);
       });
@@ -34,6 +35,18 @@ function App() {
     const updatedItemArray = items.filter((item) => item.id !== id);
     setItems(updatedItemArray);
   }
+
+  function updateItem(updatedItem) {
+    
+    const updatedItemArray = Items.map((item) => {
+      if (item.id === updatedItem.id) {
+      return updatedItem;
+      } else {
+      return item;
+      }
+      });
+      setItem(updatedItemArray);
+  }
   
   return (
     <Router>
@@ -48,9 +61,10 @@ function App() {
           <Header />
          <Checkout />
       </Route>
-      <Route path="/">
-      <PopContainer items={items} deleteItem={deleteItem} addItem={addItem}/>
-          <Home />
+          <Route path="/">
+          <Header />
+            <PopContainer items={items} deleteItem={deleteItem} addItem={addItem} updateItem={updateItem}/>
+          
           {/* <NewItemForm addItem={handleNewItem}/> */}
       </Route>
       <SellerContainer />

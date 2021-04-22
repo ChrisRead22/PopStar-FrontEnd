@@ -1,36 +1,23 @@
-// import React from 'react';
-// import "./PopCard.scss"
-// import PopCard from './PopCard'
+import React from 'react';
+import "./PopCard.scss"
+import PopCard from './PopCard'
 
 
-// function PopCardDetails ({name, description, price, image, deleteItem, addItem}) {
+function PopCardDetails ({name, description, price, image, deleteItem, addItem}) {
 
-//     function handleClick () {
-//         console.log("clicked")
+    function handleClick () {
+        console.log("clicked")
 
-//     }
+    }
 
 
-//     return (
-//         <div className="card">
-//             <div className="card__info">
-//                 <p>{name}</p>
-//                 <p className="card__price">
-//                     <small>$</small>
-//                     <strong>{price}</strong>
-//                 </p>
-//                 <div className="description">
-//                     <p>{description}</p>
-//                 </div>
-//             </div>
-//             <img className="card__image" src={image} alt={name} />
+    return (
+        <div className="card">
                 
-//                 <button className="cart__button" onClick={handleClick}>Add To Cart </button>
-                
-//         </div>
-//     );
+        </div>
+    );
 
-// }
+}
     
  
-// export default PopCardDetails;
+export default PopCardDetails;

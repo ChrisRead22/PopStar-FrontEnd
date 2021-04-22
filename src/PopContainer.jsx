@@ -1,4 +1,5 @@
 import React from 'react';
+import NewItemForm from './NewItemForm';
 import PopCard from './PopCard';
 
 
@@ -6,7 +7,9 @@ const PopContainer = ({items, deleteItem, addItem}) => {
     console.log(items)
 
 const allItems = items.map(item => {
-    return <PopCard
+  return <PopCard
+    deleteItem={deleteItem}
+    addItem={addItem}
       key={item.id}
       id={item.id}
       name={item.name}
@@ -19,15 +22,15 @@ const allItems = items.map(item => {
     
     <div className="home">
       <div className="home__container">
+        <NewItemForm addItem={addItem}/>
+        
         <img className="home__image" src="https://ar.al/2020/08/07/what-is-the-small-web/small-web-topology.jpg"></img>
         <div className="home__row">
          {allItems}
-        </div>
-
-        
+        </div>        
       </div>
     </div>
-    
+     
   );
 }
 

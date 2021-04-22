@@ -4,6 +4,8 @@ function NewItemForm({ addItem }) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -16,6 +18,7 @@ function NewItemForm({ addItem }) {
         name: name,
         image: image,
         price: price,
+        description: description
       }),
     })
       .then((r) => r.json())
@@ -47,6 +50,13 @@ function NewItemForm({ addItem }) {
           placeholder="Price"
           value={price}
           onChange={(e) => setPrice(parseFloat(e.target.value))}
+        />
+         <input
+          type="text"
+          name="description"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
         <button type="submit">Add Item</button>
       </form>
