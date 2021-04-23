@@ -6,10 +6,11 @@ import Search from "./Search";
 import { useState } from 'react';
 
 
-const PopContainer = ({items, deleteItem, addItem,currentUser,updateItem={updateItem}}) => {
+const PopContainer = ({cart, addToCart, items, deleteItem, addItem,currentUser,updateItem={updateItem}}) => {
     console.log(items)
 
   const [searchTerm, setSearchTerm] = useState("");
+
 
   const displayedItems = items.filter((item) => {
     return item.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -19,6 +20,8 @@ const PopContainer = ({items, deleteItem, addItem,currentUser,updateItem={update
 
 const allItems = items.map(item => {
   return <PopCard
+    addToCart={addToCart}
+    cart={cart}
     updateItem={updateItem}
     currentUser={currentUser}
     deleteItem={deleteItem}

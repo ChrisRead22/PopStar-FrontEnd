@@ -3,8 +3,10 @@ import "./Header.scss";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
 import Cart from "./Cart";
+import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
-const Header = () => {
+const Header = ({items}) => {
+  
   
   
   return (
@@ -30,7 +32,20 @@ const Header = () => {
         <span className="header__optionLineOne">Returns</span>
         <span className="header__optionLineTwo">& Orders</span>
       </div>
-      <Cart /> 
+      <div className="cart">
+      <Link to="/checkout">
+        <div className="cart__optionBasket">
+          <ShoppingBasketIcon />
+          <span
+            className="cart__optionLineTwo 
+        header__basketCount"
+          >
+            0
+          </span>
+          
+        </div>
+      </Link>
+    </div>
     </div>
   );
 };

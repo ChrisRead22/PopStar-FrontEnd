@@ -5,7 +5,7 @@ import PopCardDetails from './PopCardDetails'
 import CancelIcon from '@material-ui/icons/Cancel';
 import EditPopCard from './EditPopCard';
 
-function PopCard ({id, name, description, price, image, deleteItem,updateItem,currentUser}) {
+function PopCard ({cart, addToCart, id, name, description, price, image, deleteItem,updateItem,currentUser}) {
     //const { id } = useParams();
    
    
@@ -21,7 +21,17 @@ function PopCard ({id, name, description, price, image, deleteItem,updateItem,cu
             })
 
         }) .then(response => response.json())
-           .then(response => console.log(response))
+           .then(response => {
+                addToCart(response.item)
+            //    console.log(response)
+            //    const id = response.item.id
+            //    const name = response.item.name
+            //    const price = response.item.price
+            //    const image = response.item.image
+            //    const description = response.item.description
+                // response.item
+
+           })
     }
    
     const CartButton = () => {

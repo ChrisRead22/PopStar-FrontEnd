@@ -12,9 +12,10 @@ import PopContainer from "./PopContainer"
 import SignupForm from "./SignupForm";
 
 function App() {
-  const [cart, setCart] = useState({})
+  const [cart, setCart] = useState([])
   const [items, setItems] = useState([])
   const [currentUser, setCurrentUser] = useState(null)
+  // console.log(cart)
   //console.log(items)
 console.log(currentUser)
   useEffect(() => {
@@ -24,6 +25,12 @@ console.log(currentUser)
         setItems(itemArray);
       });
   }, []);
+
+  function addToCart(cartItem){
+    // console.log("hi")
+    // console.log(cartItem)
+    setCart([...cart, cartItem])
+  }
 
 
   function addItem(newItem) {
@@ -56,14 +63,14 @@ console.log(currentUser)
         <Switch>
           <Route path="/popContainer">
           <Header />
-            <PopContainer currentUser={currentUser} items={items} deleteItem={deleteItem} addItem={addItem} updateItem={updateItem}/>
+            <PopContainer cart={cart} addToCart={addToCart} currentUser={currentUser} items={items} deleteItem={deleteItem} addItem={addItem} updateItem={updateItem}/>
       </Route>
       <Route path="/login">
         <Login setCurrentUser={setCurrentUser} />
       </Route>
       <Route path="/checkout">
-          <Header />
-         <Checkout />
+          <Header items={items}/>
+         <Checkout cart={cart} />
       </Route>
           <Route path="/">
             <Home/>
