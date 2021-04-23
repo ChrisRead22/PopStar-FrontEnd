@@ -8,6 +8,7 @@
     width: 200%;
     max-height: 400px;
     min-width: 100px;
+    position: relative;
 
     background-color: white;
     z-index: 1;
@@ -24,23 +25,37 @@
     margin-top: 5px;
 }
 .card__info{
-    text-align:left;
+    text-align:center;
     height: 100px;
     margin-bottom: 15px;
+
 }
 
 .cart__button{
-    background: #f0c14b;
-    border: 1px solid;
+    background: hsl(43, 78%, 83%);
+    border: none;
     margin-top: 10px;
+    padding: 5px;
+    border-radius: 15px;
     border-color: #a88734 #9c7e31 #846a29;
     color: #111
 }
 
 .delete__button{
     background: red;
-    border: 1px solid;
+    border: none;
+    margin: 10px;
+    padding: 5px;
     margin-top: 10px;
+    border-radius: 15px;
     border-color: #a88734 #9c7e31 #846a29;
     color: #111
+}
+
+button {
+
+    border-radius: 15px;
+    border: none;
+    padding: 5px;
+
 }

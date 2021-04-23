@@ -7,9 +7,31 @@ import EditPopCard from './EditPopCard';
 
 function PopCard ({id, name, description, price, image, deleteItem,updateItem,currentUser}) {
     //const { id } = useParams();
+   
+   
+    function handleAddCart () {
+        fetch(`http://localhost:3000/purchases`, { 
+            method:'POST',
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: 1,
+                item_id: id
+            })
+
+        }) .then(response => response.json())
+           .then(response => console.log(response))
+    }
+   
     const CartButton = () => {
+        
+        
+      
+        
+        
         return (
-            <button>Add to Cart</button>
+            <button onClick={handleAddCart}>Add to Cart</button>
         )
     }
 

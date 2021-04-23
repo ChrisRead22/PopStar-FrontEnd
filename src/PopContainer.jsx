@@ -2,10 +2,20 @@ import React from 'react';
 import EditPopCard from './EditPopCard';
 import NewItemForm from './NewItemForm';
 import PopCard from './PopCard';
+import Search from "./Search";
+import { useState } from 'react';
 
 
 const PopContainer = ({items, deleteItem, addItem,currentUser,updateItem={updateItem}}) => {
     console.log(items)
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const displayedItems = items.filter((item) => {
+    return item.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+  
 
 const allItems = items.map(item => {
   return <PopCard
@@ -20,7 +30,14 @@ const allItems = items.map(item => {
       description={item.description}
       price={item.price}
     />
+   
+    
+
+
   })
+
+  
+
   return (
     
     <div className="home">
@@ -28,8 +45,9 @@ const allItems = items.map(item => {
         {currentUser ?
           <NewItemForm addItem={addItem} />
           : ''}
-        <img className="home__image" src="https://ar.al/2020/08/07/what-is-the-small-web/small-web-topology.jpg"></img>
+        {/* <img className="home__image" src="https://ar.al/2020/08/07/what-is-the-small-web/small-web-topology.jpg"></img> */}
         <div className="home__row">
+        <Search searchTerm={searchTerm} onSearchChange={setSearchTerm} />
          {allItems}
         </div>        
       </div>

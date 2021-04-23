@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div>
+    <div className="landingpage">
         <h2>browse Pops?</h2>
                 <Link to="/popContainer"> 
         <button>Browse Store</button>

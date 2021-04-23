@@ -11,7 +11,6 @@ import SellerContainer from "./SellerContainer";
 import PopContainer from "./PopContainer"
 import SignupForm from "./SignupForm";
 
-
 function App() {
   const [cart, setCart] = useState({})
   const [items, setItems] = useState([])
@@ -77,7 +76,6 @@ console.log(currentUser)
         </Switch>
       </div>
     </Router>
-      
   );
 }
 
